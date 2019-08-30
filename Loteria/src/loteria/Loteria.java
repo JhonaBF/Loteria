@@ -12,14 +12,23 @@ public class Loteria {
         
         System.out.println("Digite 6 números");
         for (int i = 0; i < 6; i++) {
-            capNum(in, i);
+            int num = -1;
+            while (num == -1)
+                num = capNum(in, i);
         }
         
     }
     
     public static int capNum(Scanner in, int i) {
+        
         System.out.println("Digite o " + (i + 1) + "º Número");
-        return 0;
+        int num = in.nextInt();
+        
+        if (num >=1 && num <= 60)
+            return num;
+        else
+            return -1;
+       
     }
     
 }
