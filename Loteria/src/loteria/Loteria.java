@@ -15,8 +15,15 @@ public class Loteria {
         System.out.println("Digite 6 números");
         for (int i = 0; i < 6; i++) {
             int num = -1;
-            while (num == -1)
+            while (num == -1){
                 num = capNum(in, i);
+                for (int j = 0; j < i; j++) {
+                    if (valores[j] == num) {
+                        num = -1;
+                        break;
+                    }
+                }
+            }   
             valores[i] = num; 
         }
         
