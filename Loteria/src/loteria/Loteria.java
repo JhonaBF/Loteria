@@ -1,11 +1,13 @@
 package loteria;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Loteria {
 
     public static void main(String[] args) {
+        
         Scanner in = new Scanner(System.in);
         int[] valores = new int[] {0, 0, 0, 0, 0, 0};
         //int[] valores2 = new int[6];
@@ -28,6 +30,24 @@ public class Loteria {
         }
         
         imprimeVetor(valores);
+        
+        Random r = new Random();
+        int[] bolas = new int[] {0, 0, 0, 0, 0, 0};        
+        for (int i = 0; i < 6; i++) {           
+            int bola = r.nextInt(60) + 1;            
+            for (int j = 0; j <= i; j++) {
+                if (bolas[j] == bola) {
+                    i -= 1;
+                    break;
+                } else {
+                    bolas[i] = bola;
+                    break;
+                }
+            }    
+        }
+        
+        System.out.println("Os números sorteados são :");
+        imprimeVetor(bolas);
         
     }
     
