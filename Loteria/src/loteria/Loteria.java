@@ -29,25 +29,15 @@ public class Loteria {
             valores[i] = num; 
         }
         
+        System.out.println("Seus números são:");
         imprimeVetor(valores);
         
-        Random r = new Random();
-        int[] bolas = new int[] {0, 0, 0, 0, 0, 0};        
-        for (int i = 0; i < 6; i++) {           
-            int bola = r.nextInt(60) + 1;            
-            for (int j = 0; j <= i; j++) {
-                if (bolas[j] == bola) {
-                    i -= 1;
-                    break;
-                } else {
-                    bolas[i] = bola;
-                    break;
-                }
-            }    
-        }
+        int[] bolas = sortear();
         
-        System.out.println("Os números sorteados são :");
+        System.out.println("Os números sorteados são:");
         imprimeVetor(bolas);
+        
+        verificarSorteio(valores, bolas);
         
     }
     
@@ -68,6 +58,60 @@ public class Loteria {
             System.out.print(vet[i] + " ");
         }
         System.out.println();
+    }
+    
+    public static int[] sortear(){
+        Random r = new Random();
+        int[] bolas = new int[] {0, 0, 0, 0, 0, 0};        
+        for (int i = 0; i < 6; i++) {           
+            int bola = r.nextInt(60) + 1;            
+            for (int j = 0; j <= i; j++) {
+                if (bolas[j] == bola) {
+                    i -= 1;
+                    break;
+                } else {
+                    bolas[i] = bola;
+                    break;
+                }
+            }    
+        }
+        return bolas;
+    }
+    
+    public static void verificarSorteio(int[] valores, int[] bolas){
+        int quantAcertos = 0;
+        boolean[] acertos = new boolean[] {false, false, false, false, false, false};
+        
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (valores[i] == bolas[j]){
+                    acertos[j] = true;
+                    quantAcertos++;
+                    break;
+                }
+            }
+        }
+        
+        if (quantAcertos > 0){
+            if (quantAcertos == 1){
+                System.out.println("Você acertou um número");
+                for (int i = 0; i < 6; i++) {
+                    if (acertos[i] == true)
+                        System.out.println("Você acertou a bola " + (i + 1));
+                }
+            }   
+            else{
+                System.out.println("Você acertou " + quantAcertos + " números");
+                System.out.print("Você acertou as bolas ");
+                for (int i = 0; i < 6; i++) {
+                    if (acertos[i] == true)
+                        System.out.print((i + 1) + " ");
+                }
+            }  
+        }
+        else
+            System.out.println("Você errou todos os números.");
+        
     }
     
 }
